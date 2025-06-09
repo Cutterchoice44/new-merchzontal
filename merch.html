@@ -36,11 +36,11 @@
     /* ─── NAVIGATION BAR ─────────────────────────────────────────────────── */
     #main-nav {
       position: relative;
-      display: flex;
+      display: flex;                  
       width: 100%;
-      margin-top: 1.5rem;
+      margin-top: 1.5rem;             
       background-color: var(--teal);
-      padding: 0.8rem 0;
+      padding: 0.8rem 0;              
       z-index: 1000;
     }
     #main-nav::before {
@@ -94,30 +94,24 @@
       }
     }
 
-    /* ─── MERCH: FORCE FULL-WIDTH IFRAME ────────────────────────────────── */
-    .merch-section {
-      padding: 2rem 0;
-      margin: 0 auto;
-      max-width: 100%;        /* span the whole page */
-    }
+    /* ─── MERCH EMBED: DROP THE SCALE HACK ───────────────────────────────── */
     .iframe-wrapper {
-      width: 100%;            /* full container width */
-      height: 1000px;         /* adjust this height until you see all products */
-      overflow: hidden;
-      margin: 2rem 0;
+      overflow: visible;
+      margin: 2rem auto;
+      /* let embed decide its own width & height */
     }
     .iframe-wrapper iframe {
-      width: 100%;
-      height: 100%;
+      width: auto;       /* back to the embed’s native sizing */
+      height: auto;
       border: none;
       border-radius: 16px;
-      transform: none;        /* drop the old scale hack */
+      transform: none;   /* remove the old scale(2) */
     }
   </style>
 </head>
 
 <body>
-  <!-- HEADER (with animated GIF slots) -->
+  <!-- HEADER (with animated‐GIF slots) -->
   <header class="header-banner">
     <div class="header-gif-right"></div>
     <div class="header-gif-left"></div>
@@ -133,7 +127,7 @@
     </div>
   </header>
 
-  <!-- NAVIGATION BAR -->
+  <!-- NAVIGATION -->
   <nav id="main-nav">
     <div class="nav-item nav-left">
       <a href="index.html#history">HOME</a>
@@ -146,8 +140,8 @@
     </div>
   </nav>
 
-  <!-- MERCH CONTENT: single Direct.app embed will now stretch full-width -->
-  <main class="merch-section">
+  <!-- MERCH CONTENT: single Direct.app embed -->
+  <main class="merch-section" style="text-align:center;">
     <div class="iframe-wrapper">
       <iframe
         src="https://direct.app/embed/cutterschoiceradio"
