@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  
   <style>
     :root {
       --teal: #5A8785;
@@ -33,7 +33,7 @@
       height: 100%;
     }
 
-    /* ─── NAVIGATION BAR ─────────────────────────────────────────────────── */
+    /* ─── NAV BAR ───────────────────────────────────────────────────────── */
     #main-nav {
       position: relative;
       display: flex;
@@ -43,29 +43,27 @@
       padding: 0.8rem 0;
       z-index: 1000;
     }
-    #main-nav::before {
+    #main-nav::before, #main-nav::after {
       content: "";
       position: absolute;
-      top: -4px; left: 0;
-      width: 100%; height: 4px;
-      background: linear-gradient(
-        to bottom,
-        #fff 0px, #fff 2px,
-        #000 2px, #000 4px
-      );
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to bottom,
+          /* top stripe */
+          #fff 0px, #fff 2px,
+          #000 2px, #000 4px
+        );
       z-index: 2;
     }
     #main-nav::after {
-      content: "";
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 100%; height: 4px;
-      background: linear-gradient(
-        to bottom,
-        #000 0px, #000 2px,
-        #fff 2px, #fff 4px
-      );
-      z-index: 2;
+      top: auto;
+      bottom: -4px;
+      background: linear-gradient(to bottom,
+          /* bottom stripe */
+          #000 0px, #000 2px,
+          #fff 2px, #fff 4px
+        );
     }
     #main-nav .nav-item {
       flex: 1;
@@ -94,31 +92,26 @@
       }
     }
 
-    /* ─── MERCH: GIVE IFRAME A FIXED HEIGHT ─────────────────────────────── */
+    /* ─── MERCH SECTION & IFRAME ────────────────────────────────────────── */
     .merch-section {
       padding: 2rem 0;
-      margin: 0 auto;
+      margin: 0 auto 200px;   /* push footer down by 200px */
       max-width: 100%;
       text-align: center;
     }
-    .iframe-wrapper {
+    .merch-section iframe {
       width: 100%;
-      height: 600px;       /* ← adjust this until you see all products */
-      overflow: hidden;
-      margin: 2rem 0;
-    }
-    .iframe-wrapper iframe {
-      width: 100%;
-      height: 100%;
+      height: 1300px;         /* give enough room for all items */
       border: none;
       border-radius: 16px;
-      transform: none;
+      display: block;
+      margin: 0 auto;
     }
   </style>
 </head>
 
 <body>
-  <!-- HEADER (with animated GIFs) -->
+  <!-- HEADER (with animated GIF slots) -->
   <header class="header-banner">
     <div class="header-gif-right"></div>
     <div class="header-gif-left"></div>
@@ -147,14 +140,12 @@
     </div>
   </nav>
 
-  <!-- MERCH CONTENT -->
+  <!-- MERCH CONTENT: ONE IFRAME ONLY, SHOWING ALL ITEMS SIDE-BY-SIDE -->
   <main class="merch-section">
-    <div class="iframe-wrapper">
-      <iframe
-        src="https://direct.app/embed/cutterschoiceradio"
-        loading="lazy"
-      ></iframe>
-    </div>
+    <iframe
+      src="https://direct.app/embed/cutterschoiceradio"
+      loading="eager"
+    ></iframe>
   </main>
 
   <!-- FOOTER -->
