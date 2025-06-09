@@ -37,11 +37,11 @@
     #main-nav {
       position: relative;
       display: flex;
-      align-items: center;      /* ← centers your links vertically */
+      align-items: center;     /* ← centers your link text vertically */
       width: 100%;
       margin-top: 1.5rem;
       background-color: var(--teal);
-      padding: 1.2rem 0;        /* adjust this if you want a taller/shorter bar */
+      padding: 1.8rem 0;       /* controls bar height */
       z-index: 1000;
     }
     /* Top stripes sit just above the teal bar */
@@ -86,4 +86,81 @@
       color: #fff;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 2rem;
-      text
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      #main-nav {
+        flex-direction: column;
+        padding: 1rem 0;
+      }
+      #main-nav::before,
+      #main-nav::after {
+        display: none;
+      }
+      #main-nav .nav-item {
+        width: 100%;
+        margin: 1.5rem 0;
+      }
+    }
+
+    /* ─── MERCH SECTION & IFRAME ────────────────────────────────────────── */
+    .merch-section {
+      padding: 2rem 0;
+      margin: 0 auto 200px;   /* push footer below */
+      max-width: 100%;
+      text-align: center;
+    }
+    .merch-section iframe {
+      width: 100%;
+      height: 1300px;         /* adjust to show all items */
+      border: none;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER (with animated GIF slots) -->
+  <header class="header-banner">
+    <div class="header-gif-right"></div>
+    <div class="header-gif-left"></div>
+    <div class="logo-container">
+      <img class="logo" src="/images/logo.png" alt="Cutters Choice Radio Logo" loading="lazy">
+    </div>
+    <div class="title">
+      <h1>Cutters Choice Radio</h1>
+      <p class="tagline">The home of relentless flavas and significant bangers!</p>
+    </div>
+    <div class="logo-container">
+      <img class="logo" src="/images/logo.png" alt="Cutters Choice Radio Logo" loading="lazy">
+    </div>
+  </header>
+
+  <!-- NAVIGATION BAR -->
+  <nav id="main-nav">
+    <div class="nav-item nav-left">
+      <a href="index.html#history">HOME</a>
+    </div>
+    <div class="nav-item nav-center">
+      <a href="index-ourDJS.html">OUR DJS</a>
+    </div>
+    <div class="nav-item nav-right">
+      <a href="our-story.html">OUR STORY</a>
+    </div>
+  </nav>
+
+  <!-- MERCH CONTENT -->
+  <main class="merch-section">
+    <iframe
+      src="https://direct.app/embed/cutterschoiceradio"
+      loading="eager"
+    ></iframe>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="banner"></footer>
+</body>
+</html>
