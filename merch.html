@@ -21,71 +21,54 @@
       --dark: #000;
       --light: #fafafa;
     }
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
-    /* ─── NAVIGATION BAR ─────────────────────────────────────────────────── */
-    /* 1) A 2px white stripe + 2px black stripe above, then a full-width teal bar,
-         then a 2px black stripe + 2px white stripe below. 
-       2) Three links (“HOME” / “OUR DJS” / “OUR STORY”), each spanning exactly one-third of the width. 
-       3) Each link is centered within its third. */
-
-    #main-nav {
-      position: relative;
-      display: flex;                  /* arrange children in a row */
-      width: 100%;
-      margin-top: 1.5rem;             /* push nav down from page top */
-      background-color: var(--teal);
-      padding: 0.8rem 0;              /* vertical padding to match mockup */
-      z-index: 1000;
+    html, body {
+      background-color: var(--dark);
+      color: var(--light);
+      font-family: Arial, sans-serif;
+      height: 100%;
     }
 
-    /* ─── TOP PSEUDO‐STRIPES ───────────────────────────────────────────── */
+    /* ─── NAVIGATION BAR (unchanged) ─────────────────────────────────────── */
+    #main-nav {
+      position: relative;
+      display: flex;
+      width: 100%;
+      margin-top: 1.5rem;
+      background-color: var(--teal);
+      padding: 0.8rem 0;
+      z-index: 1000;
+    }
     #main-nav::before {
       content: "";
       position: absolute;
-      top: -4px;       /* 4px above the teal block */
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(
-        to bottom,
-        #fff 0px,   /* white from 0→2px */
-        #fff 2px,
-        #000 2px,   /* black from 2→4px */
-        #000 4px
+      top: -4px; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(to bottom,
+        #fff 0px, #fff 2px,
+        #000 2px, #000 4px
       );
       z-index: 2;
     }
-
-    /* ─── BOTTOM PSEUDO‐STRIPES ────────────────────────────────────────── */
     #main-nav::after {
       content: "";
       position: absolute;
-      bottom: -4px;    /* 4px below the teal block */
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(
-        to bottom,
-        #000 0px,   /* black from 0→2px */
-        #000 2px,
-        #fff 2px,   /* white from 2→4px */
-        #fff 4px
+      bottom: -4px; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(to bottom,
+        #000 0px, #000 2px,
+        #fff 2px, #fff 4px
       );
       z-index: 2;
     }
-
-    /* ─── NAV ITEMS: each link occupies 1/3 and is centered within its cell ───────── */
     #main-nav .nav-item {
-      flex: 1;              /* all nav-items share equal width (one third each) */
-      text-align: center;   /* center the link within that third */
+      flex: 1;
+      text-align: center;
     }
-
-    /* ─── LINK STYLING ───────────────────────────────────────────────── */
     #main-nav .nav-item a {
       color: #fff;
       font-family: 'Bebas Neue', sans-serif;
@@ -94,59 +77,64 @@
       text-decoration: none;
       line-height: 1;
     }
-
     @media (max-width: 768px) {
-      /* On narrow screens, stack the three links vertically */
       #main-nav {
         flex-direction: column;
-        padding: 1rem 0;    /* increase vertical padding for touch ease */
+        padding: 1rem 0;
       }
       #main-nav::before,
       #main-nav::after {
-        display: none;      /* hide pseudo-stripes on mobile */
+        display: none;
       }
       #main-nav .nav-item {
         width: 100%;
-        margin: 0.5rem 0;   /* add spacing between stacked links */
+        margin: 0.5rem 0;
       }
     }
 
-    /* ─── MERCH IFRAME SCALING ───────────────────────────────────────── */
-    .iframe-wrapper {
-      width: 100%;
-      height: 1000px;       /* 2× the original 500px */
-      overflow: hidden;
-      margin-top: 2rem;
+    /* ─── MERCH: HORIZONTAL FLOW & EAGER LOADING ────────────────────────── */
+    .merch-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .iframe-wrapper iframe {
-      width: 50%;           /* half width + scale(2) → full width */
-      height: 500px;        /* half height + scale(2) → 1000px */
+    .merch-section .iframe-wrapper {
+      flex: 0 0 auto;
+      width: 300px;
+      height: 500px;
+      overflow: hidden;
+    }
+    .merch-section .iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
       border: none;
       border-radius: 16px;
-      transform: scale(2);
-      transform-origin: top left;
     }
   </style>
 </head>
 
 <body>
-  <!-- HEADER (same as on your other pages) -->
+  <!-- HEADER (same as your other pages) -->
   <header class="header-banner">
     <div class="header-gif-right"></div>
     <div class="header-gif-left"></div>
     <div class="logo-container">
-      <img class="logo" src="/images/logo.png" alt="Cutters Choice Radio Logo" loading="lazy">
+      <img class="logo" src="/images/logo.png" alt="Cutters Choice Radio Logo">
     </div>
     <div class="title">
       <h1>Cutters Choice Radio</h1>
       <p class="tagline">The home of relentless flavas and significant bangers!</p>
     </div>
     <div class="logo-container">
-      <img class="logo" src="/images/logo.png" alt="Cutters Choice Radio Logo" loading="lazy">
+      <img class="logo" src="/images/logo.png" alt="Cutters Choice Radio Logo">
     </div>
   </header>
 
-  <!-- NAV: “HOME” at left third, “OUR DJS” center third, “OUR STORY” right third -->
+  <!-- NAVIGATION -->
   <nav id="main-nav">
     <div class="nav-item nav-left">
       <a href="index.html#history">HOME</a>
@@ -159,14 +147,15 @@
     </div>
   </nav>
 
-  <!-- MERCH CONTENT: no extra heading or back button, since “HOME” covers navigation -->
-  <main class="merch-section" style="padding:0; margin:0 auto; max-width:900px;">
+  <!-- MERCH CONTENT – now flows horizontally and loads immediately -->
+  <main class="merch-section">
     <div class="iframe-wrapper">
       <iframe
         src="https://direct.app/embed/cutterschoiceradio"
-        loading="lazy"
+        loading="eager"
       ></iframe>
     </div>
+    <!-- If you ever add more merch embeds, just duplicate the .iframe-wrapper block -->
   </main>
 
   <footer class="banner"></footer>
